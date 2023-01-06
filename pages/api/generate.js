@@ -51,25 +51,65 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(scene) {
+function generatePrompt(scene, style, character) {
   // const capitalizedSetting =
   //   scene[0].toUpperCase() + scene.slice(1).toLowerCase();
-  return `Suggest a setting and initial characters with names the cops meet at a crime scene in the style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler
+  // return `Suggest a setting and initial characters with names the cops meet at a crime scene in the 
+  // style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler
+  // `
+  // Setting: Living Space
+  // Names: dirty brownstone, luxury penthouse, small shop second-floor
+  // Character: housewife: Martha Smith, retired craftsman: Bob Arthur, building supervisor: Art Danzel
+  // Setting: Dirty Areas
+  // Names: behind bar, dumpster, subway entrance
+  // Character: barkeeper: Jack Finias, homeless person: Steve Fox, delivery boy: Bobby Tex
+  // Setting: Roads
+  // Names: bridge, secluded parking, alley
+  // Character: truck driver: Miles Petersen, traffic cop: Isaac Harwood, commuting office worker: Hu Shi
+  // Setting: ${capitalizedSetting}
+  // Names:`
+  // Write the opening scene to a crime mystery with a setting and initial characters with names the cops meet at a crime scene in the style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler
 
-`
+  let prompt = `Suggest a setting and initial characters with names the cops meet at a crime scene in the 
+  style of Arthur Conan Doyle, Agatha Christie, Dashiell Hammet, P.D. James, or Raymond Chandler`
 
-// Setting: Living Space
-// Names: dirty brownstone, luxury penthouse, small shop second-floor
-// Character: housewife: Martha Smith, retired craftsman: Bob Arthur, building supervisor: Art Danzel
-// Setting: Dirty Areas
-// Names: behind bar, dumpster, subway entrance
-// Character: barkeeper: Jack Finias, homeless person: Steve Fox, delivery boy: Bobby Tex
-// Setting: Roads
-// Names: bridge, secluded parking, alley
-// Character: truck driver: Miles Petersen, traffic cop: Isaac Harwood, commuting office worker: Hu Shi
-// Setting: ${capitalizedSetting}
-// Names:`
-// Write the opening scene to a crime mystery with a setting and initial characters with names the cops meet at a crime scene in the style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler
+  if (style === "Agatha Christie"){
+    prompt += 
+    `
+    Setting: ${scene}
+    Character: ${character}
+    style: ${style}
+    `;
+  } else if (style === "Raymond Chandler"){
+    prompt += 
+    `
+    Setting: ${scene}
+    Character: ${character}
+    style: ${style}
+    `;
+  }else if (style === "P.D. James"){
+    prompt += 
+    `
+    Setting: ${scene}
+    Character: ${character}
+    style: ${style}
+    `;
+  } else if (style === "Dashiell Hammet"){
+    prompt += 
+    `
+    Setting: ${scene}
+    Character: ${character}
+    style: ${style}
+    `;
+  } else {
+    prompt += 
+    `
+    Setting: ${scene}
+    Character: ${character}
+    style: ${style}
+    `;
+  }
+  return prompt;
 }
 
 
