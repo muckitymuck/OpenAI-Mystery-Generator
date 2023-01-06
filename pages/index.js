@@ -42,11 +42,11 @@ export default function Home() {
     <div>
       <Head>
         <title>Mystery Generator</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/magglass.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
+        <img src="/magglass.png" className={styles.icon} />
         <h3>Set a Mystery</h3>
         <form onSubmit={onSubmit}>
           <input
