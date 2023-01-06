@@ -2,9 +2,11 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 
+
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [sceneInput, setSceneInput] = useState("");
   const [result, setResult] = useState();
+  console.log(result);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -14,7 +16,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ scene: sceneInput }),
       });
 
       const data = await response.json();
@@ -23,7 +25,7 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
+      setSceneInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -34,24 +36,28 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
+        <title>Mystery Generator</title>
         <link rel="icon" href="/dog.png" />
       </Head>
 
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Set a Mystery</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="scene"
+            placeholder="Enter an location"
+            value={sceneInput}
+            onChange={(e) => setSceneInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate scene" />
+
         </form>
         <div className={styles.result}>{result}</div>
+        
+
+
       </main>
     </div>
   );

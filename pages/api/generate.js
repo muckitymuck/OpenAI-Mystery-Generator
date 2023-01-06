@@ -15,11 +15,11 @@ export default async function (req, res) {
     return;
   }
 
-  const animal = req.body.animal || '';
-  if (animal.trim().length === 0) {
+  const scene = req.body.scene || '';
+  if (scene.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Please enter a valid location",
       }
     });
     return;
@@ -28,8 +28,9 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(animal),
-      temperature: 0.6,
+      prompt: generatePrompt(scene),
+      max_tokens: 200,
+      temperature: 0.9,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
@@ -48,15 +49,25 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(animal) {
-  const capitalizedAnimal =
-    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-  return `Suggest three names for an animal that is a superhero.
+function generatePrompt(scene) {
+  // const capitalizedSetting =
+  //   scene[0].toUpperCase() + scene.slice(1).toLowerCase();
+  return `Suggest a setting and initial characters with names the cops meet at a crime scene in the style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: ${capitalizedAnimal}
-Names:`;
+`
+
+// Setting: Living Space
+// Names: dirty brownstone, luxury penthouse, small shop second-floor
+// Character: housewife: Martha Smith, retired craftsman: Bob Arthur, building supervisor: Art Danzel
+// Setting: Dirty Areas
+// Names: behind bar, dumpster, subway entrance
+// Character: barkeeper: Jack Finias, homeless person: Steve Fox, delivery boy: Bobby Tex
+// Setting: Roads
+// Names: bridge, secluded parking, alley
+// Character: truck driver: Miles Petersen, traffic cop: Isaac Harwood, commuting office worker: Hu Shi
+// Setting: ${capitalizedSetting}
+// Names:`
+// Write the opening scene to a crime mystery with a setting and initial characters with names the cops meet at a crime scene in the style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler
 }
+
+
