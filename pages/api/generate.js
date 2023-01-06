@@ -26,11 +26,13 @@ export default async function (req, res) {
   }
 
   try {
+    const temperature = Number(req.body.temperature) || 0.5;
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(scene),
       max_tokens: 200,
-      temperature: 0.9,
+      //temperature: 0.9,
+      temperature: temperature,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {

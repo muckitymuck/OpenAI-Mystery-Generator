@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 
 
 export default function Home() {
+  const [temperature, setTemperature] = useState(0.5);
   const [sceneInput, setSceneInput] = useState("");
   const [result, setResult] = useState();
   console.log(result);
@@ -16,7 +17,10 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ scene: sceneInput }),
+        body: JSON.stringify({ 
+          scene: sceneInput,
+          temperature: temperature, 
+        }),
       });
 
       const data = await response.json();
@@ -51,6 +55,18 @@ export default function Home() {
             value={sceneInput}
             onChange={(e) => setSceneInput(e.target.value)}
           />
+          {/* Add the range slider */}
+          <label htmlFor="temperature">Temperature:</label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            id="temperature"
+            value={temperature}
+            onChange={(e) => setTemperature(e.target.value)}
+          />
+          <span>{temperature}</span>
           <input type="submit" value="Generate scene" />
 
         </form>
