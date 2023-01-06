@@ -1,41 +1,17 @@
-# OpenAI API Quickstart - Node.js example app
+# OpenAI Mystery Generator
 
-This is an example pet name generator app used in the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/). Check out the tutorial or follow the instructions below to get set up.
+This project is a web application that uses OpenAI's GPT-3 API to generate mystery scenes in the style of Arthur Conan Doyle, Agatha Christie, H.P. Lovecraft, or Raymond Chandler.
 
-## Setup
+## Technology
 
-1. If you don’t have Node.js installed, [install it from here](https://nodejs.org/en/)
+Next.js - A framework for building server-rendered React applications
+OpenAI API - A suite of machine learning models that allow developers to generate natural language text
+React - A JavaScript library for building user interfaces
+Node.js - A JavaScript runtime for building server-side applications
+Express - A web application framework for Node.js
 
-2. Clone this repository
+## Optimizations
+I am planning some optimizations to pick a specific style of writing and a opening paragraphs to the story.
 
-3. Navigate into the project directory
-
-   ```bash
-   $ cd openai-quickstart-node
-   ```
-
-4. Install the requirements
-
-   ```bash
-   $ npm install
-   ```
-
-5. Make a copy of the example environment variables file
-
-   On Linux systems: 
-   ```bash
-   $ cp .env.example .env
-   ```
-   On Windows:
-   ```powershell
-   $ copy .env.example .env
-   ```
-6. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
-
-7. Run the app
-
-   ```bash
-   $ npm run dev
-   ```
-
-You should now be able to access the app at [http://localhost:3000](http://localhost:3000)! For the full context behind this example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).
+## License
+This project is licensed under the MIT License. 
