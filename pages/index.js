@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Mystery Generator</title>
+        <title>OpenAI Mystery Generator</title>
         <link rel="icon" href="/magglass.png" />
       </Head>
 
