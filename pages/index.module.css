@@ -64,6 +64,7 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  width: 75%;
 }
 .main selectStyle {
   margin-bottom: 40px;
