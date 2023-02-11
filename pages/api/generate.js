@@ -26,10 +26,11 @@ export default async function (req, res) {
   }
 
   try {
+    const style = String(req.body.style)
     const temperature = Number(req.body.temperature) || 0.5;
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(scene),
+      prompt: generatePrompt(scene, temperature, style),
       max_tokens: 200,
       //temperature: 0.9,
       temperature: temperature,
@@ -37,6 +38,8 @@ export default async function (req, res) {
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
+
+    
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
@@ -51,12 +54,13 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(scene, style, character) {
+function generatePrompt(scene, character, style) {
 
   let prompt = `Suggest a setting and initial characters with names the cops meet at a crime scene in the 
-  style of Arthur Conan Doyle, Agatha Christie, Dashiell Hammet, P.D. James, or Raymond Chandler`
+  style of ${style}.  Begin with the parameters set after the generated text.`
 
   if (style === "Agatha Christie"){
+    console.log(style)
     prompt += 
     `
     Setting: ${scene}
@@ -92,6 +96,7 @@ function generatePrompt(scene, style, character) {
     style: ${style}
     `;
   }
+  console.log(style)
   return prompt;
 }
 
