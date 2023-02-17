@@ -9,7 +9,7 @@ export default async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message: "OpenAI API key not configured, please follow instructions in README.md",
+        message: "OpenAI API key not configured",
       }
     });
     return;
@@ -27,10 +27,11 @@ export default async function (req, res) {
 
   try {
     const style = String(req.body.style)
+    const scenario = String(req.body.scenario)
     const temperature = Number(req.body.temperature) || 0.5;
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: generatePrompt(scene, temperature, style),
+      prompt: generatePrompt(scene, temperature, style, scenario),
       max_tokens: 200,
       //temperature: 0.9,
       temperature: temperature,
@@ -54,10 +55,10 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(scene, character, style) {
+function generatePrompt(scene, character, style, scenario) {
 
   let prompt = `Suggest a setting and initial characters with names the cops meet at a crime scene in the 
-  style of ${style}.  Begin with the parameters set after the generated text.`
+  style of ${style}.  Begin with the parameters set after the generated text. Involve details from ${scenario}`
 
   if (style === "Agatha Christie"){
     console.log(style)
@@ -66,6 +67,7 @@ function generatePrompt(scene, character, style) {
     Setting: ${scene}
     Character: ${character}
     style: ${style}
+    scenario: ${scenario}
     `;
   } else if (style === "Raymond Chandler"){
     prompt += 
@@ -73,6 +75,7 @@ function generatePrompt(scene, character, style) {
     Setting: ${scene}
     Character: ${character}
     style: ${style}
+    scenario: ${scenario}
     `;
   }else if (style === "P.D. James"){
     prompt += 
@@ -80,6 +83,7 @@ function generatePrompt(scene, character, style) {
     Setting: ${scene}
     Character: ${character}
     style: ${style}
+    scenario: ${scenario}
     `;
   } else if (style === "Dashiell Hammet"){
     prompt += 
@@ -87,6 +91,7 @@ function generatePrompt(scene, character, style) {
     Setting: ${scene}
     Character: ${character}
     style: ${style}
+    scenario: ${scenario}
     `;
   } else {
     prompt += 
@@ -94,9 +99,11 @@ function generatePrompt(scene, character, style) {
     Setting: ${scene}
     Character: ${character}
     style: ${style}
+    scenario: ${scenario}
     `;
   }
   console.log(style)
+  console.log(prompt)
   return prompt;
 }
 

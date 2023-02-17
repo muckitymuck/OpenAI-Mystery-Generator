@@ -6,6 +6,7 @@ import styles from "./index.module.css";
 export default function Home() {
   const [temperature, setTemperature] = useState(0.5);
   const [sceneInput, setSceneInput] = useState("");
+  const [scenarioInput, setScenarioInput] = useState("");
   const [style, setStyle] = useState("");
   const [result, setResult] = useState();
   console.log(result);
@@ -20,6 +21,7 @@ export default function Home() {
         },
         body: JSON.stringify({ 
           scene: sceneInput,
+          scenario: scenarioInput,
           temperature: temperature, 
         }),
       });
@@ -31,6 +33,7 @@ export default function Home() {
 
       setResult(data.result);
       setSceneInput("");
+      setScenarioInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -56,6 +59,13 @@ export default function Home() {
             value={sceneInput}
             onChange={(e) => setSceneInput(e.target.value)}
           />
+          <input 
+            type="text"
+            name="scenario"
+            placeholder="Enter details about the scene"
+            value={scenarioInput}
+            onChange={(e) => setScenarioInput(e.target.value)}
+          />
           {/* Add the range slider */}
           <label htmlFor="temperature">Temperature:</label>
           <input
@@ -78,7 +88,7 @@ export default function Home() {
             <option value="Dashiell Hammet">Dashiell Hammet</option>
             <option value="P.D. James">P.D. James</option>
           </select>
-          <span id="selectStyle">{style}</span>
+          <span id="selectStyle" >{style}</span>
 
           <input type="submit" value="Generate scene" />
 
