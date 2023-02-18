@@ -26,7 +26,7 @@ export default async function (req, res) {
   }
 
   try {
-    const style = String(req.body.style)
+    const style = String(req.body.selectStyle)
     const scenario = String(req.body.scenario)
     const temperature = Number(req.body.temperature) || 0.5;
     const completion = await openai.createCompletion({
@@ -36,6 +36,7 @@ export default async function (req, res) {
       //temperature: 0.9,
       temperature: temperature,
     });
+    console.log(temperature)
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
@@ -55,13 +56,15 @@ export default async function (req, res) {
   }
 }
 
+
+//replace character with a temerature or add character input for prompt
 function generatePrompt(scene, character, style, scenario) {
 
   let prompt = `Suggest a setting and initial characters with names the cops meet at a crime scene in the 
   style of ${style}.  Begin with the parameters set after the generated text. Involve details from ${scenario}`
 
   if (style === "Agatha Christie"){
-    console.log(style)
+    //console.log(style)
     prompt += 
     `
     Setting: ${scene}
