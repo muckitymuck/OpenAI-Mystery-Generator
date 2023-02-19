@@ -26,7 +26,7 @@ export default async function (req, res) {
   }
 
   try {
-    const style = String(req.body.selectStyle)
+    const style = String(req.body.style)
     const scenario = String(req.body.scenario)
     const temperature = Number(req.body.temperature) || 0.5;
     const completion = await openai.createCompletion({
@@ -36,7 +36,7 @@ export default async function (req, res) {
       //temperature: 0.9,
       temperature: temperature,
     });
-    console.log(temperature)
+    //console.log(temperature)
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
@@ -65,11 +65,12 @@ function generatePrompt(scene, character, style, scenario) {
 
   if (style === "Agatha Christie"){
     //console.log(style)
+    //Made changes here to experiment with style setting.  Still not going from index.js to here.
     prompt += 
     `
     Setting: ${scene}
     Character: ${character}
-    style: ${style}
+    style: "Agatha Christie"
     scenario: ${scenario}
     `;
   } else if (style === "Raymond Chandler"){
