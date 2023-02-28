@@ -59,6 +59,7 @@ export default function Home() {
             value={sceneInput}
             onChange={(e) => setSceneInput(e.target.value)}
           />
+          {/* Add more text regarding scene details */}
           <input 
             type="text"
             name="scenario"
