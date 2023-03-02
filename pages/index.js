@@ -36,6 +36,7 @@ export default function Home() {
       setScenarioInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
+      //Might need some planning
       console.error(error);
       alert(error.message);
     }
